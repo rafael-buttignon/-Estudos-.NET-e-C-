@@ -1,8 +1,9 @@
-﻿using System.Reflection.Metadata.Ecma335;
+﻿using ByteBank.Sistemas;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ByteBank.Funcionarios
 {
-    public class Diretor : Funcionario
+    public class Diretor : Autenticavel
     {
         public Diretor(double salario, string cpf) : base(salario, cpf)
         {
