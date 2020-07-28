@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace _07_ByteBank
 {
@@ -6,22 +7,44 @@ namespace _07_ByteBank
     {
         static void Main(string[] args)
         {
-            ContaCorrente conta = new ContaCorrente(867, 7451854);
-            Console.WriteLine("Conta Numero: " + ContaCorrente.TotalDeContasCriadas);
+            try
+            {
+                Metodo();
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Aconteceu um erro!");
+            }
 
-            Console.WriteLine(conta.Agencia);
-            Console.WriteLine(conta.Numero);
-
-            ContaCorrente contaDaGabriela = new ContaCorrente(867, 8458454);
-
-            Console.WriteLine(contaDaGabriela.Agencia);
-            Console.WriteLine(contaDaGabriela.Numero);
-
-
-            Console.WriteLine("Conta Numero: " + ContaCorrente.TotalDeContasCriadas);
-
-            Console.WriteLine();
             Console.ReadLine();
+        }
+
+        private static void Metodo()
+        {
+            TestaDivisao(0);
+        }
+
+        private static void TestaDivisao(int divisor)
+        {
+            try
+            {
+                int resultado = Dividir(10, divisor);
+                Console.WriteLine("Resultado da divisão de 10 por " + divisor + " é " + resultado);
+            }
+            catch(DivideByZeroException ex)
+            {
+                //Console.WriteLine(ex.Message);
+                //Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Não e possivel fazer uma divisão por 0 !");
+            }
+        }
+
+        private static int Dividir(int numero, int divisor)
+        {
+            ContaCorrente conta = null;
+            Console.WriteLine(conta.GetSaldo());
+            return numero / divisor;
         }
     }
 }

@@ -13,7 +13,6 @@ namespace _06_ByteBank
             cliente.Cpf = "434.565.566.30";
             cliente.Profissao = "Programador";
 
-
             conta.Titular = cliente;
             conta.SetSaldo(-10);
 
