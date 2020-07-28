@@ -1,7 +1,4 @@
-﻿using ByteBank.Sistemas;
-using System.Reflection.Metadata.Ecma335;
-
-namespace ByteBank.Funcionarios
+﻿namespace ByteBank.Funcionarios
 {
     public class Diretor : FuncionarioAutenticavel
     {

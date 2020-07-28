@@ -2,7 +2,7 @@
 
 namespace ByteBank.Sistemas
 {
-    public interface Autenticavel
+    public interface IAutenticavel
     {
         bool Autenticar(string senha);
     }
