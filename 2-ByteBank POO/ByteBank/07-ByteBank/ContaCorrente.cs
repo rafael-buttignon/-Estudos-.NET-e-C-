@@ -11,29 +11,31 @@ namespace _07_ByteBank
         public int Agencia { get; }
         public int Numero { get; }
 
-        private double saldo = 100;
+        private double Saldo = 100;
 
-        public bool Sacar(double valor)
+        public void Sacar(double valor)
         {
-            if (saldo < valor)
+            if(valor < 0)
             {
-                return false;
+                throw new ArgumentException("Valor inválido para o saque.", nameof(valor));
             }
-            else
+
+            if (Saldo < valor)
             {
-                saldo -= valor;
-                return true;
+                throw new SaldoInsuficienteException(Saldo, valor);
             }
+
+            Saldo -= valor;
         }
 
         public void Depositar(double valor)
         {
-            saldo += valor;
+            Saldo += valor;
         }
 
         public double GetSaldo()
         {
-            return saldo;
+            return Saldo;
         }
 
         public void SetSaldo(double saldo)
@@ -42,19 +44,17 @@ namespace _07_ByteBank
             {
                 return;
             }
-            this.saldo = saldo;
+            this.Saldo = saldo;
         }
 
-        public bool Transferir(double valor, ContaCorrente contaDestino)
+        public void Transferir(double valor, ContaCorrente contaDestino)
         {
-            if (saldo < valor)
-                return false;
-            else
+            if (valor < 0)
             {
-                saldo -= valor;
-                contaDestino.Depositar(valor);
-                return true;
+                throw new ArgumentException("Valor inválido para a transferencia.", nameof(valor));
             }
+             Sacar(valor);
+             contaDestino.Depositar(valor);
         }
 
          public ContaCorrente(int agencia, int numero)
@@ -70,9 +70,9 @@ namespace _07_ByteBank
 
             Agencia = agencia;
             Numero = numero;
-            TaxaOperacao = 30 / TotalDeContasCriadas;
 
             TotalDeContasCriadas++;
+            TaxaOperacao = 30 / TotalDeContasCriadas;
         }
     }
 }
