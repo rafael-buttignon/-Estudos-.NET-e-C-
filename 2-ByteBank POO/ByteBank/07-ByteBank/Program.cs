@@ -13,7 +13,7 @@ namespace _07_ByteBank
                 ContaCorrente conta = new ContaCorrente(45453, 423434);
                 ContaCorrente conta2 = new ContaCorrente(4345, 434234);
 
-                conta2.Transferir(-10, conta);
+                conta2.Transferir(200000, conta);
 
                 conta.Depositar(50);
                 Console.WriteLine(conta.GetSaldo());
@@ -38,14 +38,23 @@ namespace _07_ByteBank
             }
             catch (SaldoInsuficienteException ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
+            }
+            catch(OperacaoFinanceiraException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine("Informações da INNER EXCEPTION (exceção interna): ");
+                Console.WriteLine(ex.InnerException.Message);
+                Console.WriteLine(ex.InnerException.StackTrace);
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-                //Metodo();
+            //Metodo();
             Console.ReadLine();
         }
 
