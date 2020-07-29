@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace _07_ByteBank
@@ -6,6 +7,54 @@ namespace _07_ByteBank
     class Program
     {
         static void Main(string[] args)
+        {
+            try
+            {
+                CarregarContas();
+            }
+            catch
+            {
+                Console.WriteLine("CATCH NO METODO MAIN");
+            }
+
+            Console.WriteLine("Execução Finalizada!");
+            Console.ReadLine();
+        }
+
+        private static void CarregarContas()
+        {
+            using (LeitorDeArquivos leitor = new LeitorDeArquivos("teste.txt"))
+            {
+                leitor.LerProximaLinha();
+            }
+
+
+            // ----------------------------------
+
+            //LeitorDeArquivos leitor = null;
+
+            //try
+            //{
+            //    leitor = new LeitorDeArquivos("contas.txt");
+            //    leitor.LerProximaLinha();
+            //    leitor.LerProximaLinha();
+            //    leitor.LerProximaLinha();
+            //}
+            //catch(IOException)
+            //{
+            //    Console.WriteLine("Exceção do tipo IOException capturada e tratada!");
+            //}
+            //finally
+            //{
+            //    if(leitor != null)
+            //    {
+            //        leitor.Fechar();
+            //    }
+            //}
+
+        }
+
+        private static void TestInnerExcepetion()
         {
 
             try
@@ -26,9 +75,9 @@ namespace _07_ByteBank
                 Console.WriteLine("Não e possivel dividir para 0.");
                 Console.WriteLine(ex.Message);
             }
-            catch(ArgumentException ex)
+            catch (ArgumentException ex)
             {
-                if(ex.ParamName == "numero")
+                if (ex.ParamName == "numero")
                 {
 
                 }
@@ -42,7 +91,7 @@ namespace _07_ByteBank
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
             }
-            catch(OperacaoFinanceiraException ex)
+            catch (OperacaoFinanceiraException ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine(ex.StackTrace);
@@ -54,10 +103,7 @@ namespace _07_ByteBank
             {
                 Console.WriteLine(ex.Message);
             }
-            //Metodo();
-            Console.ReadLine();
         }
-
         private static void Metodo()
         {
             TestaDivisao(0);
