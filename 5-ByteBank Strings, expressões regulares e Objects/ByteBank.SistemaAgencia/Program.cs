@@ -9,6 +9,15 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
+            string urlteste = "http://www.bytebank.com/cambio";
+            int indiceByteBank = urlteste.IndexOf("http://www.bytebank.com");
+
+
+            Console.WriteLine(urlteste.StartsWith("http://www.bytebank.com"));
+            Console.WriteLine(urlteste.EndsWith("cambio"));
+            Console.WriteLine(urlteste.Contains("Bytebank"));
+            Console.ReadLine();
+
 
             string textoVazio = "";
             string textoNullo = null;
@@ -17,6 +26,21 @@ namespace ByteBank.SistemaAgencia
             Console.WriteLine(String.IsNullOrEmpty(textoNullo));
             Console.WriteLine(String.IsNullOrEmpty(textoTop));
             Console.WriteLine();
+
+            string mensagemOrigem = "PALAVRA";
+            string termoBusca = "ra";
+
+            Console.WriteLine(mensagemOrigem.ToLower());
+
+            termoBusca = termoBusca.Replace('r', 'R');
+            Console.WriteLine(termoBusca);
+
+            termoBusca = termoBusca.Replace('a', 'A');
+            Console.WriteLine(termoBusca);
+
+            Console.WriteLine(mensagemOrigem.IndexOf(termoBusca));
+            Console.ReadLine();
+
 
             string urlParametros = "http://www.bytebank.com/cambio?moedaOrigem=real&moedaDestino=dolar&valor=1500";
             ExtratorValorDeArgumentosURL extratorDeValores = new ExtratorValorDeArgumentosURL(urlParametros);
