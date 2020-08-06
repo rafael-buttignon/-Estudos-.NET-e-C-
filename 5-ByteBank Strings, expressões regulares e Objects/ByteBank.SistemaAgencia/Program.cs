@@ -2,6 +2,7 @@
 using ByteBank.Modelos.Funcionarios;
 using Humanizer;
 using System;
+using System.Text.RegularExpressions;
 
 namespace ByteBank.SistemaAgencia
 {
@@ -9,6 +10,37 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
+
+
+            //string padrao ="[0-9][0-9][0-9][0-9][-][0-9][0-9][0-9][0-9]";
+            //string padrao = "[0-9]{4,5}[-]{0,1}[0-9]{4}";
+            //string padrao = "[0-9]{4,5}-{0,1}[0-9]{4}";
+            string padrao = "[0-9]{4,5}-?[0-9]{4}";
+
+
+
+            string textoDeTexte = "Meu nome e Rafael, me ligue em 4784-4546";
+
+            Match resultado = Regex.Match(textoDeTexte, padrao);
+
+            Console.WriteLine(resultado.Value);
+
+            Console.ReadLine();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             string urlteste = "http://www.bytebank.com/cambio";
             int indiceByteBank = urlteste.IndexOf("http://www.bytebank.com");
 
