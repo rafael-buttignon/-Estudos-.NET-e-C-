@@ -1,4 +1,11 @@
-﻿namespace ByteBank.Modelos.Funcionarios
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using ByteBank.Modelos;
+
+namespace ByteBank.Modelos.Funcionarios
 {
     public abstract class FuncionarioAutenticavel : Funcionario, IAutenticavel
     {
