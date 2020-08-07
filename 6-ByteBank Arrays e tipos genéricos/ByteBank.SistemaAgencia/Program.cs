@@ -7,14 +7,52 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(SomarVarios(1, 2, 3, 4, 5, 6, 7, 8, 143, 143));
-            Console.WriteLine(SomarVarios(8, 143, 143));
-            Console.WriteLine(SomarVarios(143, 143));
+            Lista<int> idades = new Lista<int>();
 
+
+            idades.Adicionar(5);
+            idades.AdicionarVarios(5, 5, 5, 5);
+
+            ContaCorrente conta = null;
+
+
+            int idadeSoma = 0;
+            for(int i = 0; i < idades.Tamanho; i++)
+            {
+                int idadeAtual = idades[i];
+            }
+
+            Lista<string> idadesString = new Lista<string>();
+            idadesString.Adicionar("Texto qual quer");
 
             Console.ReadLine();
         }
-        
+
+        static void TestaListaDeObject()
+        {
+            ListaDeObject listaDeIdades = new ListaDeObject();
+
+            listaDeIdades.Adicionar(10);
+            listaDeIdades.Adicionar(5);
+            listaDeIdades.Adicionar(4);
+            listaDeIdades.AdicionarVarios(15, 16, 17, 19, 20, 16);
+
+            for (int i = 0; i < listaDeIdades.Tamanho; i++)
+            {
+                int idade = (int)listaDeIdades[i];
+
+                Console.WriteLine($"Idade no indice {i} : { idade}");
+            }
+            Console.ReadLine();
+        }
+        static void ConsoleDeSomarVarios()
+        {
+            Console.WriteLine(SomarVarios(1, 2, 3, 4, 5, 6, 7, 8, 143, 143));
+            Console.WriteLine(SomarVarios(8, 143, 143));
+            Console.WriteLine(SomarVarios(143, 143));
+            Console.ReadLine();
+        }
+
         static int SomarVarios(params int[] numeros)
         {
             int acumulador = 0;
