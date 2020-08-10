@@ -44,10 +44,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Estagiario.cs" />
+    <Compile Include="Extensoes\ListExtensoes.cs" />
     <Compile Include="Lista.cs" />
     <Compile Include="ListaDeContaCorrente.cs" />
     <Compile Include="ListaDeObject.cs" />
-    <Compile Include="ListExtensoes.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

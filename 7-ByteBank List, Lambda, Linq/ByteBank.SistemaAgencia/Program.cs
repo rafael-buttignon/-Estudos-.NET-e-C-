@@ -1,4 +1,5 @@
 ﻿using ByteBank.Modelos;
+using ByteBank.SistemaAgencia.Extensoes;
 using System;
 using System.Collections.Generic;
 
@@ -17,13 +18,12 @@ namespace ByteBank.SistemaAgencia
             idadesList.Add(4);
             idadesList.Add(5);
 
-            ListExtensoes.AdicionarVarios(idadesList, 1, 123232, 243434, 154545);
+            idadesList.AdicionarVarios(45, 44, 677, 343);
 
-            idadesList.AdicionarVarios(1, 2, 4, 6, 77, 99, 100);
-
+            //ListExtensoes.AdicionarVarios(idadesList, 45, 47, 11, 190);
             //idadesList.Remove(4);
 
-            for(int i= 0; i < idadesList.Count; i++)
+            for (int i= 0; i < idadesList.Count; i++)
             {
                 Console.WriteLine(idadesList[i]);
             }
