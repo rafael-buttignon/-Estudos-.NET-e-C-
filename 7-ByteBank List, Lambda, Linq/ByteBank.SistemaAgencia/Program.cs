@@ -1,4 +1,5 @@
 ﻿using ByteBank.Modelos;
+using ByteBank.SistemaAgencia.Comparadores;
 using ByteBank.SistemaAgencia.Extensoes;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,48 @@ namespace ByteBank.SistemaAgencia
     {
         static void Main(string[] args)
         {
+            var contas = new List<ContaCorrente>()
+            {
+                new ContaCorrente(454, 56670),
+                new ContaCorrente(452, 56670),
+                new ContaCorrente(458, 10000),
+                new ContaCorrente(459, 56670),
+                new ContaCorrente(400, 99999)
+        };
+
+            //contas.Sort(); chama a implementação Icomparable
+
+            contas.Sort(new ComparadorContaCorrentePorAgencia());
+
+            foreach (var conta in contas)
+            {
+                Console.WriteLine($"Conta número {conta.Numero}, ag. {conta.Agencia}");
+            }
+
+        Console.ReadLine();
+        }
+
+        static void TestaSortAndVariables()
+        {
+            var resultado = SomarVarios(1, 5, 9);
+            var conta = new ContaCorrente(3434, 34343453);
+            var gerenciador = new GerenciadorBonificacao();
+            var gerenciadores = new List<GerenciadorBonificacao>();
+
+            var nomes = new List<string>()
+            {
+                "Guilherme",
+                "Rafael",
+                "Wellington",
+                "Ana"
+            };
+            nomes.Sort();
+            foreach (var nome in nomes)
+            {
+                Console.WriteLine("Nomes Ordenados: " + nome);
+            }
+
+
             Lista<int> idades = new Lista<int>();
             List<int> idadesList = new List<int>();
 
@@ -18,19 +61,19 @@ namespace ByteBank.SistemaAgencia
             idadesList.Add(4);
             idadesList.Add(5);
 
-            idadesList.AdicionarVarios(45, 44, 677, 343);
+            idadesList.AdicionarVarios(45, 44, 67, 34);
+            idadesList.AdicionarVarios(99, -1);
+
+            idadesList.Sort();
 
             //ListExtensoes.AdicionarVarios(idadesList, 45, 47, 11, 190);
             //idadesList.Remove(4);
 
-            for (int i= 0; i < idadesList.Count; i++)
+            for (int i = 0; i < idadesList.Count; i++)
             {
                 Console.WriteLine(idadesList[i]);
             }
-
-            Console.ReadLine();
         }
-
         static void TestaListaDeObject()
         {
             ListaDeObject listaDeIdades = new ListaDeObject();
