@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ByteBankImportacaoExportacao.Modelos;
+using System;
 using System.IO;
+using System.Text;
 
 namespace ByteBankImportacaoExportacao
 {
@@ -7,17 +9,8 @@ namespace ByteBankImportacaoExportacao
     { 
         static void Main(string[] args) 
         {
-            var enderecoDoArquivo = "contas.txt";
-
-            using(var fluxoDeArquivo = new FileStream(enderecoDoArquivo, FileMode.Open))
-                using (var leitor = new StreamReader(fluxoDeArquivo)) 
-                {
-                    while (!leitor.EndOfStream)
-                    {
-                        var linha = leitor.ReadToEnd();
-                        Console.WriteLine(linha);
-                    }
-                } 
+            CriarArquivoComWriter();
+            Console.WriteLine("Aplicação Finalizada...");
             Console.ReadLine();
         }
     }
