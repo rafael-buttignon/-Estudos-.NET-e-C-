@@ -35,7 +35,7 @@
                     IsEnabled="False"
                     Grid.Column="2"
                     Click="BtnCancelar_Click">
-                Cancelar
+                Cancelar Processamento
             </Button>
 
         </Grid>
@@ -50,7 +50,7 @@
         <!-- Barra de Progresso para dar feedback ao usuário -->
         <ProgressBar Name="PgsProgresso"
                      Minimum="0"
-                     Height="23"
+                     Height="25"
                      DockPanel.Dock="Bottom"/>
 
         <ListView Name="LstResultados"

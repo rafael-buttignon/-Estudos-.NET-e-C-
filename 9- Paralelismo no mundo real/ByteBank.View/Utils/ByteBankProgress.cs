@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ByteBank.View.Utils
@@ -16,7 +13,6 @@ namespace ByteBank.View.Utils
             _taskScheduler = TaskScheduler.FromCurrentSynchronizationContext();
             _handler = handler;
         }
-
         public void Report(T value)
         {
             Task.Factory.StartNew(
