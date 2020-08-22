@@ -29,6 +29,8 @@ namespace CsharpListasSomenteLeitura
             Console.WriteLine(csharpColecoes);
 
             //Imprimir detalhes do curso
+
+            Console.ReadLine();
         }
 
         private static void Imprimir(IList<Aulas> aulas)
@@ -38,6 +40,12 @@ namespace CsharpListasSomenteLeitura
             {
                 Console.WriteLine(aula);
             }
+        }
+
+        class CarroTunado
+        {
+            public string Nome { get; set; }
+            public string Cor { get; set; }
         }
     }
 }
