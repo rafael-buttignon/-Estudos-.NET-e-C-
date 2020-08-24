@@ -3,13 +3,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CsharpListasSomenteLeitura
 {
     public class Curso
     {
+        private IDictionary<int, Aluno> dicionarioAlunos = new Dictionary<int, Aluno>();
         private ISet<Aluno> alunos = new HashSet<Aluno>();
         public IList<Aluno> Alunos
         {
@@ -44,6 +43,7 @@ namespace CsharpListasSomenteLeitura
         internal void Matricula(Aluno aluno)
         {
             alunos.Add(aluno);
+            this.dicionarioAlunos.Add(aluno.NumeroMatricula, aluno);
         }
 
 
@@ -76,6 +76,19 @@ namespace CsharpListasSomenteLeitura
                 return aulas.Sum(aula => aula.Tempo);
             }
         }
+
+        internal Aluno BuscaMatriculado(int numeroMatriculada)
+        {
+            Aluno aluno = null;
+            this.dicionarioAlunos.TryGetValue(numeroMatriculada, out aluno);
+            return aluno;
+        }
+
+        internal void SubstrituiAluno(Aluno aluno)
+        {
+            this.dicionarioAlunos[aluno.NumeroMatricula] = aluno;
+        }
+
         public override string ToString()
         {
             return $"Curso: {nome} , Tempo: {TempoTotal} , Aulas: { string.Join(", ", aulas)} ";

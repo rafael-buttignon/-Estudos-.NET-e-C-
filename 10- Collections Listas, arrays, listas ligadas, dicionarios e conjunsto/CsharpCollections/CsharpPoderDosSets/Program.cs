@@ -44,6 +44,27 @@ namespace CsharpPoderDosSets
 
             Console.WriteLine("a1 e equals a Tonini");
             Console.WriteLine(a1.Equals(tonini));
+
+            Console.Clear();
+
+            Console.WriteLine("Quem é o aluno com a matricula 34545");
+
+            Aluno aluno34545 = csharpColecoes.BuscaMatriculado(34545);
+
+            Console.WriteLine("aluno34545: " + aluno34545);
+
+
+            Console.WriteLine("Quem é o aluno com a matricula 5618");
+            Console.WriteLine(csharpColecoes.BuscaMatriculado(5618));
+
+            Aluno fabio = new Aluno("Fabio", 34545);
+            //csharpColecoes.Matricula(fabio); // o dicionario não deixa adicionar outro aluno com a mesma  matricula
+
+            csharpColecoes.SubstrituiAluno(fabio);
+
+
+            Console.WriteLine("Quem é o aluno com a matricula 34545 agora ");
+            Console.WriteLine(csharpColecoes.BuscaMatriculado(34545));
         }
 
         private static void SimpleTestSets()
