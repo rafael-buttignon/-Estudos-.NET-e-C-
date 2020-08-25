@@ -13,6 +13,8 @@ namespace CsharpPoderDosSets
             csharpColecoes.Adiciona(new Aulas("Trabalhando com Listas", 21));
             csharpColecoes.Adiciona(new Aulas("Criando uma Aula", 20));
             csharpColecoes.Adiciona(new Aulas("Modelando com Coleções", 24));
+            csharpColecoes = new Curso("C# LOOP", "Rfael");
+            csharpColecoes.Adiciona(new Aulas("1", 1));
 
 
             Aluno a1 = new Aluno("Vanessa Tonini", 34545);
