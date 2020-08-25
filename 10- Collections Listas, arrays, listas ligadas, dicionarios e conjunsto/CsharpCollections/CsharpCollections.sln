@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpLinkedList", "CsharpL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpStack", "CsharpStack\CsharpStack.csproj", "{4BF30E10-CC4B-4B76-9E43-EE85056BBC85}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsharpQueue", "CsharpQueue\CsharpQueue.csproj", "{72A01B0F-2635-4CD0-B797-C8E6BFE14627}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{4BF30E10-CC4B-4B76-9E43-EE85056BBC85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BF30E10-CC4B-4B76-9E43-EE85056BBC85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BF30E10-CC4B-4B76-9E43-EE85056BBC85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72A01B0F-2635-4CD0-B797-C8E6BFE14627}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72A01B0F-2635-4CD0-B797-C8E6BFE14627}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72A01B0F-2635-4CD0-B797-C8E6BFE14627}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72A01B0F-2635-4CD0-B797-C8E6BFE14627}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
