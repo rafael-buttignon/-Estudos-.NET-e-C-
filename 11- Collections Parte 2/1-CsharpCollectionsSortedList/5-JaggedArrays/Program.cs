@@ -23,7 +23,6 @@ namespace _5_JaggedArrays
 
             foreach (var familia in familias)
             {
-                
                 Console.WriteLine($"Familia: " + string.Join(", ", familia));
             }
         }
