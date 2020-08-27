@@ -9,6 +9,23 @@ namespace _6_ConsultandoCollections
     {
         static void Main(string[] args)
         {
+            var exemplo = "";
+            if (!string.IsNullOrEmpty(exemplo))
+            {
+                //a condição deve ser false(por conta do !) para prosseguir
+                //ele verifica a variável, como nesse caso ela tem valor, o IsNullOrEmpty irá
+                //retornar false, pois não é null nem empty a variavel
+                Console.WriteLine("entrou");
+            }
+            var exemplo2 = "1";
+            if (string.IsNullOrEmpty(exemplo2))
+            {
+                //a condição deve ser true para prosseguir
+                //se a variavel exemplo for null ou empty, irá satisfazer a condição do If
+                //pois a condição pede que o valor seja null ou empty
+                Console.WriteLine("entrou222222222222222");
+            }
+
             //PROBLEMA: obter os nomes dos messes do ano, 
             //que tem 31 dias em minusculo e em ordem alfabética
 

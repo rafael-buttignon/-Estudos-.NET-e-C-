@@ -9,11 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "2-CsharpCollectionsSortedDi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "3-CsharpCollectionsSortedSet", "3-CsharpCollectionsSortedSet\3-CsharpCollectionsSortedSet.csproj", "{47EBE879-135D-4D31-9E34-DD9D1937D2A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4-ArraysMultidimensionais", "4-ArraysMultidimensionais\4-ArraysMultidimensionais.csproj", "{1E043A8F-0A6F-498D-BEAA-1D3B0F5998C2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4-ArraysMultidimensionais", "4-ArraysMultidimensionais\4-ArraysMultidimensionais.csproj", "{1E043A8F-0A6F-498D-BEAA-1D3B0F5998C2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5-JaggedArrays", "5-JaggedArrays\5-JaggedArrays.csproj", "{813B6160-4EE1-47E9-A67D-3987DF81D6BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "5-JaggedArrays", "5-JaggedArrays\5-JaggedArrays.csproj", "{813B6160-4EE1-47E9-A67D-3987DF81D6BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6-ConsultandoCollections", "6-ConsultandoCollections\6-ConsultandoCollections.csproj", "{CF239DAB-BC92-417B-9415-5A9B0F5F62D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "6-ConsultandoCollections", "6-ConsultandoCollections\6-ConsultandoCollections.csproj", "{CF239DAB-BC92-417B-9415-5A9B0F5F62D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "7-OutrosOperadoresLINQ", "7-OutrosOperadoresLINQ\7-OutrosOperadoresLINQ.csproj", "{C8794D89-4E02-4818-A72E-4A567AE23C75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{CF239DAB-BC92-417B-9415-5A9B0F5F62D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF239DAB-BC92-417B-9415-5A9B0F5F62D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF239DAB-BC92-417B-9415-5A9B0F5F62D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8794D89-4E02-4818-A72E-4A567AE23C75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8794D89-4E02-4818-A72E-4A567AE23C75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8794D89-4E02-4818-A72E-4A567AE23C75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8794D89-4E02-4818-A72E-4A567AE23C75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
