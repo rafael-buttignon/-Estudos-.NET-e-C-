@@ -39,7 +39,7 @@ namespace _1_CsharpCollectionsSortedList
 
             Console.WriteLine("---------------");
 
-
+            
             foreach (var item in sorted)
             {
                 Console.WriteLine(item);
