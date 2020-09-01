@@ -8,9 +8,9 @@ namespace refatoracao.R29.ReplaceTypeCodeWithSubclasses.antes
     {
         void Main()
         {
-            Funcionario engenheiro = Funcionario.Criar(Funcionario.TipoFuncionario.Engenheiro, "José da Silva", 1000);
-            Funcionario vendedor = Funcionario.Criar(Funcionario.TipoFuncionario.Vendedor, "Maria Bonita", 2000);
-            Funcionario gerente = Funcionario.Criar(Funcionario.TipoFuncionario.Gerente, "João das Neves", 3000);
+            Funcionario engenheiro = new Engenheiro("José da Silva", 1000);
+            Funcionario vendedor = new Vendedor("Maria Bonita", 2000);
+            Funcionario gerente = new Gerente("João das Neves", 3000);
 
             var valorFolhaDePagamento = 
                 engenheiro.Salario 
@@ -19,7 +19,7 @@ namespace refatoracao.R29.ReplaceTypeCodeWithSubclasses.antes
         }
     }
 
-    class Funcionario
+    abstract class Funcionario
     {
         public enum TipoFuncionario
         {
@@ -28,7 +28,7 @@ namespace refatoracao.R29.ReplaceTypeCodeWithSubclasses.antes
             Gerente = 2
         }
 
-        readonly TipoFuncionario tipo;
+        protected TipoFuncionario tipo;
         public TipoFuncionario Tipo { get; }
 
         readonly string nome;
@@ -37,53 +37,48 @@ namespace refatoracao.R29.ReplaceTypeCodeWithSubclasses.antes
         readonly decimal salario;
         public decimal Salario => salario;
 
-        public decimal Comissao
-        {
-            get
-            {
-                switch (tipo)
-                {
-                    case TipoFuncionario.Engenheiro:
-                        return 0;
-                    case TipoFuncionario.Vendedor:
-                        return 1000;
-                    case TipoFuncionario.Gerente:
-                        return 0;
-                    default:
-                        return 0;
-                }
-            }
-        }
+        public abstract decimal Comissao { get; }
 
-        public decimal Bonus
-        {
-            get
-            {
-                switch (tipo)
-                {
-                    case TipoFuncionario.Engenheiro:
-                        return 0;
-                    case TipoFuncionario.Vendedor:
-                        return 0;
-                    case TipoFuncionario.Gerente:
-                        return salario / 2.0m;
-                    default:
-                        return 0;
-                }
-            }
-        }
+        public abstract decimal Bonus { get; }
 
-        private Funcionario(TipoFuncionario tipo, string nome, decimal salario)
+        public Funcionario(string nome, decimal salario)
         {
-            this.tipo = tipo;
             this.nome = nome;
             this.salario = salario;
         }
-
-        public static Funcionario Criar(TipoFuncionario tipo, string nome, decimal salario)
-        {
-            return new Funcionario(tipo, nome, salario);
-        }
     }
+    class Engenheiro : Funcionario
+    {
+        public Engenheiro(string nome, decimal salario) : base(nome, salario)
+        {
+            tipo = TipoFuncionario.Engenheiro;
+        }
 
+        public override decimal Comissao => 0;
+
+        public override decimal Bonus => 0;
+    }
+    class Vendedor : Funcionario
+    {
+        public Vendedor(string nome, decimal salario) : base(nome, salario)
+        {
+            tipo = TipoFuncionario.Vendedor;
+        }
+
+        public override decimal Comissao => 1000;
+
+        public override decimal Bonus => 0;
+    }
+    class Gerente : Funcionario
+    {
+        public Gerente(string nome, decimal salario) : base(nome, salario)
+        {
+            tipo = TipoFuncionario.Gerente;
+
+        }
+
+        public override decimal Comissao => 0;
+
+        public override decimal Bonus => Salario / 2.0m;
+    }
 }

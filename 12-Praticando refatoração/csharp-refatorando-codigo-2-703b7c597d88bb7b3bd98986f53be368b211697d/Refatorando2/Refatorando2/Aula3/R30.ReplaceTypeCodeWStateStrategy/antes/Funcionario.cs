@@ -8,9 +8,9 @@ namespace refatoracao.R30.ReplaceTypeCodeWStateStrategy.antes
     {
         void Main()
         {
-            Funcionario funcionario1 = Funcionario.Criar(Funcionario.ENGENHEIRO, 2000, 0, 0);
-            Funcionario funcionario2 = Funcionario.Criar(Funcionario.VENDEDOR, 2000, 1500, 0);
-            Funcionario funcionario3 = Funcionario.Criar(Funcionario.GERENTE, 3000, 0, 1000);
+            Funcionario funcionario1 = new Funcionario(new Engenheiro(), 2000, 0, 0);
+            Funcionario funcionario2 = new Funcionario(new Gerente(), 2000, 1500, 0);
+            Funcionario funcionario3 = new Funcionario(new Vendedor(), 3000, 0, 1000);
 
             var valorFolhaDePagamento =
                 funcionario1.Salario
@@ -25,8 +25,8 @@ namespace refatoracao.R30.ReplaceTypeCodeWStateStrategy.antes
         public const int VENDEDOR = 1;
         public const int GERENTE = 2;
 
-        private readonly int tipo;
-        public int Tipo { get; }
+        private readonly TipoFuncionario tipo;
+        public TipoFuncionario Tipo { get; }
 
         private readonly decimal salario;
         public decimal Salario { get; }
@@ -37,7 +37,7 @@ namespace refatoracao.R30.ReplaceTypeCodeWStateStrategy.antes
         private readonly decimal bonus;
         public decimal Bonus { get; }
 
-        private Funcionario(int tipo, decimal salario, decimal comissao, decimal bonus)
+        public Funcionario(TipoFuncionario tipo, decimal salario, decimal comissao, decimal bonus)
         {
             this.tipo = tipo;
             this.salario = salario;
@@ -47,25 +47,36 @@ namespace refatoracao.R30.ReplaceTypeCodeWStateStrategy.antes
 
         public decimal GetPagamento()
         {
-            switch (Tipo)
-            {
-                case ENGENHEIRO:
-                    return Salario;
-                case VENDEDOR:
-                    return Salario + Comissao;
-                case GERENTE:
-                    return Salario + Bonus;
-                default:
-                    break;
-            }
-            throw new Exception("Tipo desconhecido");
+            return Tipo.GetPagamento(this);
         }
-
-        public static Funcionario Criar(int tipo, decimal salario, decimal comissao, decimal bonus)
+    }
+     abstract class TipoFuncionario
+    {
+       public virtual decimal GetPagamento(Funcionario funcionario)
         {
-            return new Funcionario(tipo, salario, comissao, bonus);
+            return funcionario.Salario;
         }
     }
 
+    class Engenheiro : TipoFuncionario
+    {
+
+    }
+
+    class Vendedor : TipoFuncionario
+    {
+        public override decimal GetPagamento(Funcionario funcionario)
+        {
+            return funcionario.Salario + funcionario.Comissao;
+        }
+    }
+
+    class Gerente : TipoFuncionario
+    {
+        public override decimal GetPagamento(Funcionario funcionario)
+        {
+            return funcionario.Salario + funcionario.Bonus;
+        }
+    }
 
 }

@@ -33,10 +33,24 @@ namespace refatoracao.R32.DecomposeConditional.antes
 
         public decimal GetValorTotal(DateTime data, int dias)
         {
-            if (data.EhAntesDe(INICIO_VERAO) || data.EhDepoisDe(FIM_VERAO))
-                return dias * _taxaInverno + _taxaServicoInverno;
+            if (ForaDoVerao(data))
+                return TaxaInverno(dias);
+            return TaxaVerao(dias); //early return
+        }
 
-            return dias * _taxaVerao; //early return
+        private decimal TaxaVerao(int dias)
+        {
+            return dias * _taxaVerao;
+        }
+
+        private decimal TaxaInverno(int dias)
+        {
+            return dias * _taxaInverno + _taxaServicoInverno;
+        }
+
+        private bool ForaDoVerao(DateTime data)
+        {
+            return data.EhAntesDe(INICIO_VERAO) || data.EhDepoisDe(FIM_VERAO);
         }
     }
 

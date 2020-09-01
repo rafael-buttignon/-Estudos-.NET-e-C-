@@ -6,9 +6,9 @@ namespace refatoracao.R28.ReplaceTypeCodeWithClass.antes
     {
         public void Main()
         {
-            var minhaContaCorrente = new ContaBancaria(ContaBancaria.CONTA_CORRENTE, 100m);
-            var minhaPoupanca = new ContaBancaria(ContaBancaria.POUPANCA, 300m);
-            var meuInvestimento = new ContaBancaria(ContaBancaria.INVESTIMENTO, 1500m);
+            var minhaContaCorrente = new ContaBancaria(TipoConta.ContaCorrente(), 100m);
+            var minhaPoupanca = new ContaBancaria(TipoConta.Poupanca(), 300m);
+            var meuInvestimento = new ContaBancaria(TipoConta.Investimento(), 1500m);
 
             minhaContaCorrente.Depositar(100);
             minhaContaCorrente.Sacar(75);
@@ -23,12 +23,8 @@ namespace refatoracao.R28.ReplaceTypeCodeWithClass.antes
 
     class ContaBancaria
     {
-        public static int CONTA_CORRENTE = 0;
-        public static int POUPANCA = 1;
-        public static int INVESTIMENTO = 2;
-        
-        private readonly int tipoConta;
-        public int TipoConta
+        private readonly TipoConta tipoConta;
+        public TipoConta TipoConta
         {
             get
             {
@@ -45,7 +41,12 @@ namespace refatoracao.R28.ReplaceTypeCodeWithClass.antes
             }
         }
 
-        public ContaBancaria(int tipoConta, decimal saldoInicial)
+        public ContaBancaria()
+        {
+
+        }
+
+        public ContaBancaria(TipoConta tipoConta, decimal saldoInicial)
         {
             this.tipoConta = tipoConta;
             this.saldo = saldoInicial;
@@ -64,6 +65,42 @@ namespace refatoracao.R28.ReplaceTypeCodeWithClass.antes
         public void Depositar(decimal valor)
         {
             this.saldo += valor;
+        }
+    }
+
+    public class TipoConta
+    {
+        public static int CONTA_CORRENTE = 0;
+        public static int POUPANCA = 1;
+        public static int INVESTIMENTO = 2;
+
+        private readonly int id;
+
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
+        }
+        private TipoConta(int id)
+        {
+            this.id = id;
+        }
+
+        public static TipoConta ContaCorrente()
+        {
+            return new TipoConta(CONTA_CORRENTE);
+        }
+
+        public static TipoConta Poupanca()
+        {
+            return new TipoConta(POUPANCA);
+        }
+
+        public static TipoConta Investimento()
+        {
+            return new TipoConta(INVESTIMENTO);
         }
     }
 }
