@@ -8,9 +8,9 @@ namespace refatoracao.R37.ReplaceConditionalWithPolymorphism.antes
     {
         void Main()
         {
-            var r2d2 = new Robo(0, 10, 5, 0, false, 20);
-            var wally = new Robo(1, 20, 25, 10, false, 5);
-            var baymax = new Robo(2, 90, 170, 0, true, 40);
+            var r2d2 = new R2D2(10, 5, 0, false, 20);
+            var wally = new Wally(20, 25, 10, false, 5);
+            var baymax = new Baymax(90, 170, 0, true, 40);
 
             Console.WriteLine($"Velocidade do r2d2: {r2d2.GetVelocidade()}");
             Console.WriteLine($"Velocidade do wally: {wally.GetVelocidade()}");
@@ -18,14 +18,14 @@ namespace refatoracao.R37.ReplaceConditionalWithPolymorphism.antes
         }
     }
 
-    public class Robo
+    public abstract class Robo
     {
         private readonly int tipo;
         private readonly double velocidadePadrao = 12.43;
         private readonly double capacidadeDeCarga = 1.67;
-        private readonly int numeroDeBlocos = 34;
-        private readonly bool comArmadura = false;
-        private readonly double potencia;
+        protected readonly int numeroDeBlocos = 34;
+        protected readonly bool comArmadura = false;
+        protected readonly double potencia;
 
         private const int R2D2 = 0;
         private const int WALLY = 1;
@@ -56,19 +56,43 @@ namespace refatoracao.R37.ReplaceConditionalWithPolymorphism.antes
             return velocidadePadrao * potencia;
         }
 
-        public double GetVelocidade()
+        public abstract double GetVelocidade();
+    }
+    class R2D2 : Robo
+    {
+        public R2D2(double velocidadePadrao, double capacidadeDeCarga, int numeroDeBlocos, bool comArmadura, double potencia) 
+            : base(0, velocidadePadrao, capacidadeDeCarga, numeroDeBlocos, comArmadura, potencia)
         {
-            switch (tipo)
-            {
-                case R2D2:
-                    return GetVelocidadePadrao();
-                case WALLY:
-                    return GetVelocidadePadrao() - GetCapacidadeDeCarga() * numeroDeBlocos;
-                case BAYMAX:
-                    return comArmadura ? 0 : GetVelocidadePadrao(potencia);
-                default:
-                    throw new Exception("Tipo não identificado");
-            }
+        }
+
+        public override double GetVelocidade()
+        {
+            return GetVelocidadePadrao();
+        }
+    }
+
+    class Wally : Robo
+    {
+        public Wally(double velocidadePadrao, double capacidadeDeCarga, int numeroDeBlocos, bool comArmadura, double potencia) 
+            : base(1, velocidadePadrao, capacidadeDeCarga, numeroDeBlocos, comArmadura, potencia)
+        {
+        }
+
+        public override double GetVelocidade()
+        {
+            return GetVelocidadePadrao() - GetCapacidadeDeCarga() * numeroDeBlocos;
+        }
+    }
+    class Baymax : Robo
+    {
+        public Baymax(double velocidadePadrao, double capacidadeDeCarga, int numeroDeBlocos, bool comArmadura, double potencia) 
+            : base(2, velocidadePadrao, capacidadeDeCarga, numeroDeBlocos, comArmadura, potencia)
+        {
+        }
+
+        public override double GetVelocidade()
+        {
+            return comArmadura ? 0 : GetVelocidadePadrao(potencia);
         }
     }
 }

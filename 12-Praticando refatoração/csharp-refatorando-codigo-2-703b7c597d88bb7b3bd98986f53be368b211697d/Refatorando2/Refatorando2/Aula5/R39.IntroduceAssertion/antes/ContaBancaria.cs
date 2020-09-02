@@ -16,6 +16,11 @@ namespace refatoracao.R39.IntroduceAssertion.antes
         void AplicarNaPoupanca(ContaBancaria contaCorrente,
             ContaBancaria poupanca, decimal valor)
         {
+            if (contaCorrente == null || poupanca == null )
+            {
+                throw new ArgumentNullException("Nem a conta corrente e nem a conta poupança podem ser nulos!");
+            }
+
             contaCorrente.Sacar(valor);
             poupanca.Depositar(valor);
         }

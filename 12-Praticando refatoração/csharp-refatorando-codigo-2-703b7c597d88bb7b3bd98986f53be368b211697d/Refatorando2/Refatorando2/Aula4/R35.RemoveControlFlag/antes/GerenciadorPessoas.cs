@@ -23,21 +23,17 @@ namespace refatoracao.R35.RemoveControlFlag.antes
     {
         public bool EncontrarPessoaEspecial(IList<string> pessoas)
         {
-            bool encontrouPessoa = false;
+            var pessoasEspeciais = new List<string> { "Diego", "João"};
+
             foreach (var pessoa in pessoas)
             {
-                if (pessoa.Equals("Diego"))
+                if (pessoasEspeciais.Contains(pessoa))
                 {
                     EnviarAlerta();
-                    encontrouPessoa = true;
-                }
-                if (pessoa.Equals("João"))
-                {
-                    EnviarAlerta();
-                    encontrouPessoa = true;
+                    return true;
                 }
             }
-            return encontrouPessoa;
+            return false;
         }
 
         private static void EnviarAlerta()

@@ -31,8 +31,8 @@ namespace refatoracao.R36.ReplaceNestedConditional.antes
         private readonly bool ehSeparado;
         private readonly bool ehAposentado;
 
-        public Auxilio(double valorNormal, 
-            double valorAposentado, 
+        public Auxilio(double valorNormal,
+            double valorAposentado,
             double valorSeparado,
             double valorFalecido,
             bool ehFalecido, bool ehSeparado, bool ehAposentado)
@@ -48,32 +48,19 @@ namespace refatoracao.R36.ReplaceNestedConditional.antes
 
         public double GetPagamento()
         {
-            double result;
-
             if (ehFalecido)
             {
-                result = ValorFalecido;
+                return ValorFalecido; // Early Return
             }
-            else
+            if (ehSeparado)
             {
-                if (ehSeparado)
-                {
-                    result = ValorSeparado;
-                }
-                else
-                {
-                    if (ehAposentado)
-                    {
-                        result = ValorAposentado;
-                    }
-                    else
-                    {
-                        result = ValorNormal;
-                    }
-                }
+                return ValorSeparado;
             }
-
-            return result;
+            if (ehAposentado)
+            {
+                return ValorAposentado;
+            }
+            return ValorNormal;
         }
     }
 }
