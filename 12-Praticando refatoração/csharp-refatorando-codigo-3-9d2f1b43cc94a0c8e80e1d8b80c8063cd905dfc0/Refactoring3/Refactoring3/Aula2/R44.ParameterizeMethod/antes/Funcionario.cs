@@ -11,8 +11,8 @@ namespace refatoracao.R44.ParameterizeMethod.antes
             var funcionario1 = new Funcionario("Tony Estarque", 10000);
             var funcionario2 = new Funcionario("Pedro Parques", 2000);
 
-            funcionario1.DarAumentoDe5PorCento();
-            funcionario2.DarAumentoDe10PorCento();
+            funcionario1.DarAumento(5);
+            funcionario2.DarAumento(10);
         }
     }
 
@@ -29,15 +29,9 @@ namespace refatoracao.R44.ParameterizeMethod.antes
             this.nome = nome;
             this.salario = salario;
         }
-
-        public void DarAumentoDe5PorCento()
+        public void DarAumento(decimal aumento)
         {
-            salario *= 1.05m;
-        }
-
-        public void DarAumentoDe10PorCento()
-        {
-            salario *= 1.10m;
+            salario *= 1.0m + (aumento / 100.0m );
         }
     }
 }

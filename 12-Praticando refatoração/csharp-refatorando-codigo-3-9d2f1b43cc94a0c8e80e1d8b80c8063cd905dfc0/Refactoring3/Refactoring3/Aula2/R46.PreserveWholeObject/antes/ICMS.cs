@@ -9,9 +9,7 @@ namespace refatoracao.R46.PreserveWholeObject.antes
         void Main()
         {
             var nf = new NotaFiscal(1000, "SP");
-            var valorProdutos = nf.ValorProdutos;
-            var uf = nf.Uf;
-            var valorImposto = ICMS.CalcularValor(valorProdutos, uf);
+            var valorImposto = ICMS.CalcularValor(nf);
         }
     }
 
@@ -39,13 +37,13 @@ namespace refatoracao.R46.PreserveWholeObject.antes
         private const decimal ICMS_PADRAO = 0.15m;
         private const string SAO_PAULO = "SP";
 
-        public static decimal CalcularValor(decimal valorProdutos, string uf)
+        public static decimal CalcularValor(NotaFiscal nf)
         {
-            if (uf == SAO_PAULO)
+            if (nf.Uf == SAO_PAULO)
             {
-                return valorProdutos * ICMS_SP_PARA_SP;
+                return nf.ValorProdutos * ICMS_SP_PARA_SP;
             }
-            return valorProdutos * ICMS_PADRAO;
+            return nf.ValorProdutos* ICMS_PADRAO;
         }
     }
 }

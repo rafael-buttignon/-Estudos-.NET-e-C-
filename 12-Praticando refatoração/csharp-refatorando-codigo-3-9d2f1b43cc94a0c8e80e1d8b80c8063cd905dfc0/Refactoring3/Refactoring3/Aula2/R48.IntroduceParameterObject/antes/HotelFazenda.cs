@@ -9,8 +9,8 @@ namespace refatoracao.R48.IntroduceParameterObject.antes
         void Main()
         {
             var hotel = new HotelFazenda(500, 200, 800);
-            var valor5DiasNoVerao = hotel.GetValorTotal(new DateTime(2018, 1, 1), new DateTime(2018, 1, 6));
-            var valor7DiasAposVerao = hotel.GetValorTotal(new DateTime(2018, 4, 1), new DateTime(2018, 4, 8));
+            var valor5DiasNoVerao = hotel.GetValorTotal(new Periodo(new DateTime(2018, 1, 1), new DateTime(2018, 1, 6)));
+            var valor7DiasAposVerao = hotel.GetValorTotal(new Periodo(new DateTime(2018, 4, 1), new DateTime(2018, 4, 8)));
         }
     }
 
@@ -30,11 +30,11 @@ namespace refatoracao.R48.IntroduceParameterObject.antes
         private DateTime INICIO_VERAO = new DateTime(2017, 12, 23);
         private DateTime FIM_VERAO = new DateTime(2018, 03, 21);
 
-        public decimal GetValorTotal(DateTime dataEntrada, DateTime dataSaida)
+        public decimal GetValorTotal(Periodo periodoHospedagem)
         {
-            var dias = (int)(dataSaida - dataEntrada).TotalDays;
+            var dias = (int)(periodoHospedagem.Fim - periodoHospedagem.Inicio).TotalDays;
 
-            if (NaoEhVerao(dataEntrada))
+            if (NaoEhVerao(periodoHospedagem.Inicio))
                 return TaxaInverno(dias);
 
             return TaxaVerao(dias); //early return
@@ -53,6 +53,30 @@ namespace refatoracao.R48.IntroduceParameterObject.antes
         private bool NaoEhVerao(DateTime data)
         {
             return data.EhAntesDe(INICIO_VERAO) || data.EhDepoisDe(FIM_VERAO);
+        }
+    }
+
+    class Periodo
+    {
+        readonly DateTime inicio;
+        readonly DateTime fim;
+        public DateTime Inicio => inicio;
+
+        public DateTime Fim => fim;
+
+        public Periodo(DateTime inicio, DateTime fim)
+        {
+            if ((fim - inicio).TotalDays < 0)
+            {
+                throw new ArgumentException("Datas estão invertidas!");
+            }
+
+            this.inicio = inicio;
+            this.fim = fim;
+        }
+        public int Dias()
+        {
+            return (int)(fim - inicio).TotalDays;
         }
     }
 

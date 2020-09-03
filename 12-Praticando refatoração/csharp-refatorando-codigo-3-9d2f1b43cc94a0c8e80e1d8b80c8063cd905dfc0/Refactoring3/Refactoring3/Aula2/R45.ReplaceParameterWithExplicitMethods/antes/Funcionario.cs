@@ -11,16 +11,13 @@ namespace refatoracao.Parte3.Aula2.R45.ReplaceParameterWithExplicitMethods.antes
             var funcionario1 = new Funcionario("Tony Estarque", 10000);
             var funcionario2 = new Funcionario("Pedro Parques", 2000);
 
-            funcionario1.DarAumento(Funcionario.TIPO_AUMENTO_FIXO, 3000);
-            funcionario2.DarAumento(Funcionario.TIPO_AUMENTO_PORCENTUAL, 10);
+            funcionario1.DarAumentoFixo(3000);
+            funcionario2.DarAumentoPorcentual(10);
         }
     }
 
     class Funcionario
     {
-        public const int TIPO_AUMENTO_FIXO = 0;
-        public const int TIPO_AUMENTO_PORCENTUAL = 1;
-
         readonly string nome;
         public string Nome => nome;
 
@@ -32,20 +29,13 @@ namespace refatoracao.Parte3.Aula2.R45.ReplaceParameterWithExplicitMethods.antes
             this.nome = nome;
             this.salario = salario;
         }
-
-        public void DarAumento(int tipo, decimal aumento)
+        public void DarAumentoFixo(decimal aumento)
         {
-            switch (tipo)
-            {
-                case TIPO_AUMENTO_FIXO:
-                    salario += aumento;
-                    break;
-                case TIPO_AUMENTO_PORCENTUAL:
-                    salario *= (1.0m + aumento / 100.0m);
-                    break;
-                default:
-                    throw new ArgumentException("Tipo de aumento inválido");
-            }
+            salario += aumento;
+        }
+        public void DarAumentoPorcentual(decimal aumento)
+        {
+            salario *= (1.0m + aumento / 100.0m);
         }
     }
 }
