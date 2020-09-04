@@ -8,12 +8,9 @@ namespace refatoracao.R47.ReplaceParameterWMethodCall.antes
     {
         void Main(decimal descontoInicial, int quantidade, string cpfCliente)
         {
-            int pontuacaoDoCliente = ServicoDeCredito.ClienteHaQuantosAnos(cpfCliente);
-            bool clienteNegativado = ServicoDeCredito.VerificaClienteNegativado(cpfCliente);
-
             var descontoCliente =
                 new Cliente(cpfCliente)
-                .GetDescontoFinal(descontoInicial, quantidade, pontuacaoDoCliente, clienteNegativado);
+                .GetDescontoFinal(descontoInicial, quantidade);
 
             Console.WriteLine($"Desconto final: {descontoCliente}");
         }
@@ -34,8 +31,11 @@ namespace refatoracao.R47.ReplaceParameterWMethodCall.antes
             this.cpfCliente = cpfCliente;
         }
 
-        public decimal GetDescontoFinal(decimal descontoInicial, int quantidade, int pontuacaoDoCliente, bool clienteNegativado)
+        public decimal GetDescontoFinal(decimal descontoInicial, int quantidade)
         {
+            int pontuacaoDoCliente = ServicoDeCredito.ClienteHaQuantosAnos(cpfCliente);
+            bool clienteNegativado = ServicoDeCredito.VerificaClienteNegativado(cpfCliente);
+
             if (clienteNegativado)
             {
                 return 0; //early return

@@ -8,8 +8,7 @@ namespace refatoracao.R51.ReplaceConstructorWithFactoryMethod.antes
     {
         void Main()
         {
-            Funcionario funcionario = new Funcionario(TipoFuncionario.Engenheiro, 
-                "José da Silva", 1000);
+            Funcionario funcionario = Funcionario.CriarEngenheiro("José da Silva", 1000);
         }
     }
 
@@ -32,7 +31,7 @@ namespace refatoracao.R51.ReplaceConstructorWithFactoryMethod.antes
         readonly decimal salario;
         public decimal Salario => salario;
 
-        public Funcionario(TipoFuncionario tipo, string nome, decimal salario)
+        private Funcionario(TipoFuncionario tipo, string nome, decimal salario)
         {
             this.tipo = tipo;
             this.nome = nome;
@@ -41,18 +40,24 @@ namespace refatoracao.R51.ReplaceConstructorWithFactoryMethod.antes
             LancarRegistrosNoBancoDeDados();
             GerarDocumentosFiscais();
             EnviarEmailDeBoasVindas();
+        }
 
-            switch (tipo)
-            {
-                case TipoFuncionario.Vendedor:
-                    GerarRegistroDeComissao();
-                    break;
-                case TipoFuncionario.Gerente:
-                    GerarRegistroDeBonus();
-                    break;
-                default:
-                    break;
-            }
+        public Funcionario CriarVendedor(string nome, decimal salario)
+        {
+            Funcionario funcionario = new Funcionario(TipoFuncionario.Vendedor, nome, salario);
+            funcionario.GerarRegistroDeComissao();
+            return funcionario;
+        }
+        public Funcionario CriarGerente(string nome, decimal salario)
+        {
+            Funcionario funcionario = new Funcionario(TipoFuncionario.Gerente, nome, salario);
+            funcionario.GerarRegistroDeBonus();
+            return funcionario;
+        }
+
+        public static Funcionario CriarEngenheiro(string nome, decimal salario)
+        {
+            return new Funcionario(TipoFuncionario.Engenheiro, nome, salario);
         }
 
         private void GerarRegistroDeBonus()

@@ -63,15 +63,14 @@ namespace refatoracao.R52.ReplaceErrorCodeWithException.antes
             this.saldo = saldoInicial;
         }
 
-        public int Sacar(decimal valor)
+        public void Sacar(decimal valor)
         {
             if (valor > Saldo)
             {
-                return -1;
+                throw new ArgumentException("Saldo insuficiente");
             }
 
             this.saldo -= valor;
-            return 0;
         }
 
         public void Depositar(decimal valor)

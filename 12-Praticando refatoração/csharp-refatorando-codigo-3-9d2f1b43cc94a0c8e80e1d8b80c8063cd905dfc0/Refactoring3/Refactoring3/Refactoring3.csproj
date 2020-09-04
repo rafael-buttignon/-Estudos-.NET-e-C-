@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aula1\R40.RenameMethod\antes\Credito.cs" />
+    <Compile Include="Aula1\R40.RenameMethod\antes\IPessoa.cs" />
     <Compile Include="Aula1\R40.RenameMethod\depois\Credito.cs" />
     <Compile Include="Aula1\R40.RenameMethod\depois\IPessoa.cs" />
     <Compile Include="Aula1\R41.AddParameter\antes\CalculadoraDePrecos.cs" />
