@@ -63,7 +63,18 @@ namespace refatoracao.R56.PushDownMethod.antes
                     throw new ArgumentException("Tipo de funcionário inválido");
             }
         }
+    }
 
+    class Engenheiro : Funcionario
+    {
+        public Engenheiro(string nome, decimal salario) : base(nome, salario)
+        {
+            this.tipo = TipoFuncionario.Engenheiro;
+        }
+    }
+
+    class Vendedor : Funcionario
+    {
         public void DefinirComissao(decimal comissao)
         {
             if (comissao < 0)
@@ -79,6 +90,14 @@ namespace refatoracao.R56.PushDownMethod.antes
             this.comissao = comissao;
         }
 
+        public Vendedor(string nome, decimal salario) : base(nome, salario)
+        {
+            this.tipo = TipoFuncionario.Vendedor;
+        }
+    }
+
+    class Gerente : Funcionario
+    {
         public void DefinirBonus(decimal bonus)
         {
             if (bonus < 0)
@@ -93,26 +112,7 @@ namespace refatoracao.R56.PushDownMethod.antes
 
             this.bonus = bonus;
         }
-    }
 
-    class Engenheiro : Funcionario
-    {
-        public Engenheiro(string nome, decimal salario) : base(nome, salario)
-        {
-            this.tipo = TipoFuncionario.Engenheiro;
-        }
-    }
-
-    class Vendedor : Funcionario
-    {
-        public Vendedor(string nome, decimal salario) : base(nome, salario)
-        {
-            this.tipo = TipoFuncionario.Vendedor;
-        }
-    }
-
-    class Gerente : Funcionario
-    {
         public Gerente(string nome, decimal salario) : base(nome, salario)
         {
             this.tipo = TipoFuncionario.Gerente;

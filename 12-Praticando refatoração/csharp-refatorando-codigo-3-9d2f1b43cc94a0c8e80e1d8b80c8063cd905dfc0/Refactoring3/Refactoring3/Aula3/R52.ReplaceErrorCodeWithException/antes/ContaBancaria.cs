@@ -22,9 +22,14 @@ namespace refatoracao.R52.ReplaceErrorCodeWithException.antes
                     "Poupança não podem ser nulos");
             }
 
-            if (contaCorrente.Sacar(valor) == -1)
+            try
             {
-                throw new ArgumentException("Saldo insuficiente");
+                contaCorrente.Sacar(valor);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
             }
 
             poupanca.Depositar(valor);

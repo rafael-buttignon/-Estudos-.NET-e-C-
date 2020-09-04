@@ -31,6 +31,13 @@ namespace refatoracao.R55.PullUpConstructorBody.antes
         protected string logradouro;
         protected string numero;
 
+        public Cliente(string nome, string logradouro, string numero)
+        {
+            this.nome = nome;
+            this.logradouro = logradouro;
+            this.numero = numero;
+        }
+
         public string GetEndereco()
         {
             return $"{logradouro} {numero}";
@@ -43,10 +50,8 @@ namespace refatoracao.R55.PullUpConstructorBody.antes
         public string Cpf => cpf;
 
         public PessoaFisica(string nome, string logradouro, string numero, string cpf)
+            : base(nome, logradouro, numero)
         {
-            this.nome = nome;
-            this.logradouro = logradouro;
-            this.numero = numero;
             this.cpf = cpf;
         }
     }
@@ -57,10 +62,8 @@ namespace refatoracao.R55.PullUpConstructorBody.antes
         public string Cnpj => cnpj;
 
         public PessoaJuridica(string nome, string logradouro, string numero, string cnpj)
+            : base(nome, logradouro, numero)
         {
-            this.nome = nome;
-            this.logradouro = logradouro;
-            this.numero = numero;
             this.cnpj = cnpj;
         }
     }

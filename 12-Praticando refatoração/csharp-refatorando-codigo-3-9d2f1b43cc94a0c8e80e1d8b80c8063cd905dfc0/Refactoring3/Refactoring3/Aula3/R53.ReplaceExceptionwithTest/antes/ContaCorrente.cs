@@ -64,14 +64,11 @@ namespace refatoracao.R53.ReplaceExceptionwithTest.antes
 
         public decimal GetSaldoInicioAno(int ano)
         {
-            try
-            {
-                return saldosIniciais[ano];
-            }
-            catch (IndexOutOfRangeException)
+            if (!saldosIniciais.ContainsKey(ano))
             {
                 return 0;
             }
+            return saldosIniciais[ano];
         }
     }
 }

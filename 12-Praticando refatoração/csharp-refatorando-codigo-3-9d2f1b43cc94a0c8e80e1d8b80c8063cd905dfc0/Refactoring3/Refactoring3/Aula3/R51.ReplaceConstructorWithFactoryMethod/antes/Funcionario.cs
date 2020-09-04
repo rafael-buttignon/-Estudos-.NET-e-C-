@@ -42,13 +42,13 @@ namespace refatoracao.R51.ReplaceConstructorWithFactoryMethod.antes
             EnviarEmailDeBoasVindas();
         }
 
-        public Funcionario CriarVendedor(string nome, decimal salario)
+        public static Funcionario CriarVendedor(string nome, decimal salario)
         {
             Funcionario funcionario = new Funcionario(TipoFuncionario.Vendedor, nome, salario);
             funcionario.GerarRegistroDeComissao();
             return funcionario;
         }
-        public Funcionario CriarGerente(string nome, decimal salario)
+        public static Funcionario CriarGerente(string nome, decimal salario)
         {
             Funcionario funcionario = new Funcionario(TipoFuncionario.Gerente, nome, salario);
             funcionario.GerarRegistroDeBonus();
