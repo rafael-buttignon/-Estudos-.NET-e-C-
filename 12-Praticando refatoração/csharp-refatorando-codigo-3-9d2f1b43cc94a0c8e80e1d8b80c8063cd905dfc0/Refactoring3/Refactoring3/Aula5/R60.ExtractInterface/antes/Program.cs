@@ -12,24 +12,19 @@ namespace Refactoring3.Aula5.R60.ExtractInterface.antes
 
         void Main()
         {
-            var formatadorCNPJ = new CNPJFormatter();
+            IFormatter formatadorCNPJ = new CNPJFormatter();
             string codigoCNPJ = "12345678000099";
-            ImprimirCodigoFormatadoCNPJ(formatadorCNPJ, codigoCNPJ);
+            ImprimirCodigoFormatado(formatadorCNPJ, codigoCNPJ);
 
-            var formatadorCPF = new CPFFormatter();
+            IFormatter formatadorCPF = new CPFFormatter();
             string codigoCPF = "12345678001";
-            ImprimirCodigoFormatadoCPF(formatadorCPF, codigoCPF);
+            ImprimirCodigoFormatado(formatadorCPF, codigoCPF);
 
         }
 
-        private static void ImprimirCodigoFormatadoCPF(CPFFormatter formatadorCPF, string codigoCPF)
+        private static void ImprimirCodigoFormatado(IFormatter formatador, string codigo)
         {
-            Console.WriteLine($"Código formatado: {formatadorCPF.Format(codigoCPF)}");
-        }
-
-        private static void ImprimirCodigoFormatadoCNPJ(CNPJFormatter formatadorCNPJ, string codigoCNPJ)
-        {
-            Console.WriteLine($"Código formatado: {formatadorCNPJ.Format(codigoCNPJ)}");
+            Console.WriteLine($"Código formatado: {formatador.Format(codigo)}");
         }
     }
 }

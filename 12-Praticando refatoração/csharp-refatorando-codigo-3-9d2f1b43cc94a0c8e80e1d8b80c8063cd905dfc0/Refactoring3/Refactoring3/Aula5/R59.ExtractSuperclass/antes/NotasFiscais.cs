@@ -58,18 +58,25 @@ namespace refatoracao.Parte3.Aula5.R59.ExtractSuperclass.antes
         }
     }
 
-    class Pedido
+     abstract class BasePedido
     {
-        readonly string nomeCliente;
+        protected string nomeCliente;
         public string NomeCliente => nomeCliente;
 
-        readonly string enderecoEntrega;
+        protected string enderecoEntrega;
         public string EnderecoEntrega => enderecoEntrega;
 
-        private readonly List<Item> itens = new List<Item>();
+        protected readonly List<Item> itens = new List<Item>();
         internal IReadOnlyCollection<Item> Itens => new ReadOnlyCollection<Item>(itens);
 
+        public decimal ValorDosItens()
+        {
+            return itens.Sum(i => i.Total);
+        }
+    }
 
+    class Pedido : BasePedido
+    {
         void Add(Item item)
         {
             itens.Add(item);
@@ -85,32 +92,13 @@ namespace refatoracao.Parte3.Aula5.R59.ExtractSuperclass.antes
             this.nomeCliente = nomeCliente;
             this.enderecoEntrega = enderecoEntrega;
         }
-
-        public decimal ValorDosItens()
-        {
-            return itens.Sum(i => i.Total);
-        }
     }
 
-    class NotaFiscal
+    class NotaFiscal : BasePedido
     {
-        readonly string nomeCliente;
-        public string NomeCliente => nomeCliente;
-
-        readonly string enderecoEntrega;
-        public string EnderecoEntrega => enderecoEntrega;
-
-        private readonly List<Item> itens = new List<Item>();
-        internal IReadOnlyCollection<Item> Itens => new ReadOnlyCollection<Item>(itens);
-
         public NotaFiscal(Pedido pedido)
         {
             this.itens.AddRange(pedido.Itens);
-        }
-
-        public decimal ValorDosItens()
-        {
-            return itens.Sum(i => i.Total);
         }
 
         public decimal ValorDosImpostos()
