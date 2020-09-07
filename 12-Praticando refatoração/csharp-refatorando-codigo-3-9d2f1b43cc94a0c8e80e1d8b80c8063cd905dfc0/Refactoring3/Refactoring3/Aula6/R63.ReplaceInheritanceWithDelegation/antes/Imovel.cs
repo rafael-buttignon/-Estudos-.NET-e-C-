@@ -8,9 +8,8 @@ namespace refatoracao.Parte3.Aula6.R63.ReplaceInheritanceWithDelegation.antes
     {
         void Teste()
         {
-            var imovel = 
-                new Imovel("Rua dos Bobos, No. 0", 100000, 
-                            "Vinicius de Moraes", "123456789-00");
+            var imovel =
+                new Imovel("Rua dos Bobos, No. 0", 100000, new Proprietario("Vinicius de Moraes", "123456789-00"));
         }
     }
 
@@ -22,9 +21,6 @@ namespace refatoracao.Parte3.Aula6.R63.ReplaceInheritanceWithDelegation.antes
         public string Nome { get => nome; }
         public string CPF { get => cpf; }
 
-        private readonly IList<Imovel> imoveis = new List<Imovel>();
-        internal IList<Imovel> Imoveis => imoveis;
-
         private int numeroDeProcessos;
         public int NumeroDeProcessos { get => numeroDeProcessos; set => numeroDeProcessos = value; }
 
@@ -35,14 +31,17 @@ namespace refatoracao.Parte3.Aula6.R63.ReplaceInheritanceWithDelegation.antes
         }
     }
 
-    class Imovel : Proprietario
+    class Imovel
     {
+        private Proprietario proprietario;
+        internal Proprietario Proprietario { get => proprietario; set => proprietario = value; }
         private readonly String endereco;
         private decimal valor;
 
-        public Imovel(string endereco, decimal valor, string nomeProprietario, string cpfProprietario) 
-            : base(nomeProprietario, cpfProprietario)
+
+        public Imovel(string endereco, decimal valor, Proprietario proprietario) 
         {
+            this.proprietario = proprietario;
             this.endereco = endereco;
             this.valor = valor;
         }

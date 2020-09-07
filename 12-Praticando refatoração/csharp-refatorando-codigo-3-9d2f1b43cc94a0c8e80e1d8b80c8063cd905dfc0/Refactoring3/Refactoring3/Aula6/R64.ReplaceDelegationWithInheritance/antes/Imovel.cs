@@ -13,7 +13,7 @@ namespace refatoracao.Parte3.Aula6.R64.ReplaceDelegationWithInheritance.antes
         }
     }
 
-    class Imovel
+    abstract class Imovel
     {
         private readonly String endereco;
         private decimal valorImovel;
@@ -28,17 +28,13 @@ namespace refatoracao.Parte3.Aula6.R64.ReplaceDelegationWithInheritance.antes
         }
     }
 
-    class Apartamento
+    class Apartamento : Imovel
     {
-        private readonly Imovel imovel;
         private decimal valorCondominio;
 
-        public string Endereco => imovel.Endereco;
-        public decimal ValorImovel { get => imovel.ValorImovel; set => imovel.ValorImovel = value; }
-
         public Apartamento(string endereco, decimal valorImovel, decimal valorCondominio)
+            : base(endereco, valorImovel)
         {
-            this.imovel = new Imovel(endereco, valorImovel);
             this.valorCondominio = valorCondominio;
         }
     }

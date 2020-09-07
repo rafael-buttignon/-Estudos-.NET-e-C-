@@ -50,49 +50,87 @@ namespace refatoracao.R62.FormTemplateMethod.antes
         }
     }
 
-    internal class ResumoHTML
+    abstract class BaseResumo
     {
-        private Cliente cliente;
-
-        public ResumoHTML(Cliente cliente)
+        protected readonly Cliente cliente;
+        public BaseResumo(Cliente cliente)
         {
             this.cliente = cliente;
         }
 
-        internal string GetResumo()
+        public string GetResumo()
         {
             var resultado = new StringBuilder();
-            resultado.AppendLine("<h1>Locações de <em>" + cliente.Nome + "</em></h1>");
+            resultado.AppendLine(GetTitulo());
             foreach (var locacao in cliente.Locacoes)
             {
-                resultado.AppendLine(locacao.Filme.Titulo + "<br/>");
+                resultado.AppendLine(GetDetalhe(locacao));
             }
-            resultado.AppendLine("<p> Você deve: <em>R$ " + cliente.ValorTotal.ToString() + "</em></p>");
-            resultado.AppendLine("Você ganhou: " + cliente.PontosDeFidelidade.ToString() + "</em> pontos.");
+            resultado.AppendLine(GetDebitos());
+            resultado.AppendLine(GetPontos());
             return resultado.ToString();
+        }
+
+        protected abstract string GetPontos();
+
+        protected abstract string GetDebitos();
+
+        protected abstract string GetDetalhe(Locacao locacao);
+
+        protected abstract string GetTitulo();
+    }
+
+    internal class ResumoHTML : BaseResumo
+    {
+        public ResumoHTML(Cliente cliente) : base(cliente)
+        {
+        }
+
+        protected override string GetDebitos()
+        {
+            return "<p> Você deve: <em>R$ " + cliente.ValorTotal.ToString() + "</em></p>";
+        }
+
+        protected override string GetDetalhe(Locacao locacao)
+        {
+            return locacao.Filme.Titulo + "<br/>";
+        }
+
+        protected override string GetPontos()
+        {
+            return "Você ganhou: " + cliente.PontosDeFidelidade.ToString() + "</em> pontos.";
+        }
+
+        protected override string GetTitulo()
+        {
+            return "<h1>Locações de <em>" + cliente.Nome + "</em></h1>";
         }
     }
 
-    internal class Resumo
+    internal class Resumo : BaseResumo
     {
-        private Cliente cliente;
-
-        public Resumo(Cliente cliente)
+        public Resumo(Cliente cliente) : base(cliente)
         {
-            this.cliente = cliente;
         }
 
-        internal string GetResumo()
+        protected override string GetDebitos()
         {
-            var resultado = new StringBuilder();
-            resultado.AppendLine("Resumo de locações de " + cliente.Nome);
-            foreach (var locacao in cliente.Locacoes)
-            {
-                resultado.AppendLine("\t" + locacao.Filme.Titulo);
-            }
-            resultado.AppendLine("Total devido: " + cliente.ValorTotal.ToString());
-            resultado.AppendLine($"Você ganhou: {cliente.PontosDeFidelidade.ToString()} pontos");
-            return resultado.ToString();
+            return "Total devido: " + cliente.ValorTotal.ToString();
+        }
+
+        protected override string GetDetalhe(Locacao locacao)
+        {
+            return "\t" + locacao.Filme.Titulo;
+        }
+
+        protected override string GetPontos()
+        {
+            return $"Você ganhou: {cliente.PontosDeFidelidade.ToString()} pontos";
+        }
+
+        protected override string GetTitulo()
+        {
+            return "Resumo de locações de " + cliente.Nome;
         }
     }
 
