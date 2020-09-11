@@ -68,10 +68,17 @@ namespace CSharp6.R07
                     if(endereco != value)
                     {
                         endereco = value;
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Endereco"));
+                        OnPropertyChanged();
+                        OnPropertyChanged(nameof(DadosPessoais));
                     }
                 }
             }
+            
+            private void OnPropertyChanged([CallerMemberName] string propertyName = null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+
             private string telefone;
 
             public string Telefone
@@ -82,7 +89,8 @@ namespace CSharp6.R07
                     if(telefone != value)
                     {
                         telefone = value;
-                        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Telefone"));
+                        OnPropertyChanged();
+                        OnPropertyChanged(nameof(DadosPessoais));
                     }
                 }
             }
