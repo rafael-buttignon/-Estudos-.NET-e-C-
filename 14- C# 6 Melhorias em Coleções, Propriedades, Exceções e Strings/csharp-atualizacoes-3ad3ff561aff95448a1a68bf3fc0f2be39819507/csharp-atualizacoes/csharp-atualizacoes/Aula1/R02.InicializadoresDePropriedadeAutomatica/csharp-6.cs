@@ -18,7 +18,7 @@ namespace CSharp6.R02
         }
     }
 
-    class Aluno
+    public class Aluno
     {
         public string Nome { get; }
 
