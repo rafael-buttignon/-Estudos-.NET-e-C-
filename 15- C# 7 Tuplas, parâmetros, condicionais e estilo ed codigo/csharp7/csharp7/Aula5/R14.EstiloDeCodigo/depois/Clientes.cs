@@ -42,6 +42,14 @@ namespace csharp7.R14.depois
         readonly string nome;
         readonly string telefone;
         readonly string website;
+        private string endereco;
+
+        public string Endereco
+        {
+            get { return endereco; }
+            set { endereco = value; }
+        }
+
 
         public int Id => id;
 

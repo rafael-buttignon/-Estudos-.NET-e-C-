@@ -46,38 +46,22 @@ namespace csharp7.R13.depois
     {
         private const double PONTOS_POR_LOCACAO = 1.5;
 
-        public Cliente(string nome)
-        {
-            this.nome = nome;
-        }
+        public Cliente(string nome) => this.nome = nome;
+
+        ~Cliente() => Console.WriteLine("Finalizando a classe.");
 
         private string nome;
         public string Nome
         {
-            get { return nome; }
-            set { nome = value; }
+            get => nome;
+            set => nome = value;
         }
 
         public IList<Locacao> Locacoes { get; } = new List<Locacao>();
-        public double ValorTotal
-        {
-            get
-            {
-                return Locacoes.Sum(l => l.Preco);
-            }
-        }
-        public double PontosDeFidelidade
-        {
-            get
-            {
-                return Locacoes.Count * PONTOS_POR_LOCACAO;
-            }
-        }
+        public double ValorTotal => Locacoes.Sum(l => l.Preco);
+        public double PontosDeFidelidade => Locacoes.Count * PONTOS_POR_LOCACAO;
 
-        public void Adicionar(Locacao locacao)
-        {
-            Locacoes.Add(locacao);
-        }
+        public void Adicionar(Locacao locacao) => Locacoes.Add(locacao);
     }
 
     abstract class BaseResumo
