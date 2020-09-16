@@ -34,10 +34,10 @@ namespace csharp7.R09.depois
 
     public enum NivelUsuarioBlog
     {
-        Reader = 1,
-        PostAuthor = 2,
-        SuperUser = 4,
-        Admin = 8
+        Reader =     0b0001, //1,
+        PostAuthor = 0b0010, //2,
+        SuperUser =  0b0100, //4,
+        Admin =      0b1000, //8
     }
 
     class UsuarioBlog
@@ -60,7 +60,7 @@ namespace csharp7.R09.depois
 
     class Quimica
     {
-        const double CONSTANTE_AVOGADRO = 6.022140857747474e23;
+        const double CONSTANTE_AVOGADRO = 6.022_140_857_747_474e23;
 
         public static double ObterMassaEmGramas(int massAtomica)
         {

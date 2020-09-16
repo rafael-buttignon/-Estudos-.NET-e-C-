@@ -30,8 +30,22 @@ namespace CSharp7
         };
 
         //static async Task<int> Main(string[] args)
-        static void Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
+
+            try
+            {
+                Console.WriteLine(await csharp7.R10.depois.MenuItem.GetGoogleAsync());
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+                return 1;
+            }
+
+            Console.ReadKey();
+            return 0;
+
             //try
             //{
             //    Console.WriteLine(await csharp7.R10.depois.MenuItem.GetGoogleAsync());
