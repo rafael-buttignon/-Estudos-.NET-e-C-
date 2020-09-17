@@ -46,8 +46,8 @@ namespace csharp7.R14.depois
 
         public string Endereco
         {
-            get { return endereco; }
-            set { endereco = value; }
+            get => endereco;
+            set => endereco = value;
         }
 
 
