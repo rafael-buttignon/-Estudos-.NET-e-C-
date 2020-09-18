@@ -1,8 +1,5 @@
-﻿using ByteBank.Portal.Controller;
-using System;
+﻿using System;
 using System.Net;
-using System.Reflection;
-using System.Text;
 
 namespace ByteBank.Portal.Infraestrutura
 {
@@ -43,33 +40,12 @@ namespace ByteBank.Portal.Infraestrutura
 
                 var path = requisicao.Url.AbsolutePath;
 
-
                 if (Utilidades.EhArquivo(path))
                 {
-
-                    var assembly = Assembly.GetExecutingAssembly();
-                    var nomeResource = Utilidades.ConverterPathParaNomeAssembly(path);
-
-                    var nomeResorce = "Bytebank.Portal.Assets.js.main.js";
-                    var resorceStream = assembly.GetManifestResourceStream(nomeResorce);
-
-                    if (resorceStream == null)
-                    {
-                        resposta.StatusCode = 404;
-                        resposta.OutputStream.Close();
-                    }
-                    else
-                    {
-                        var bytesResource = new byte[resorceStream.Length];
-                        resorceStream.Read(bytesResource, 0, (int)resorceStream.Length);
-                        resposta.ContentType = Utilidades.ObterTipoDeConteudo(path);
-                        resposta.StatusCode = 200;
-                        resposta.ContentLength64 = resorceStream.Length;
-                        resposta.OutputStream.Write(bytesResource, 0, bytesResource.Length);
-                        resposta.OutputStream.Close();
-                    }
+                    var manipulador = new ManipuladorRequisicaoArquivo();
+                    manipulador.Manipular(resposta, path);
                 }
-                else if(path == "/Cambio/MXN")
+                else if (path == "/Cambio/MXN")
                 {
                     //var controller = new CambioController();
                     //var paginaConteudo = controller.MXN();
@@ -81,7 +57,6 @@ namespace ByteBank.Portal.Infraestrutura
                     //resposta.ContentType = "text/html; charset=utf-8";
                     //resposta.OutputStream.Write(bufferArquivo, 0, bufferArquivo.Length);
                     //resposta.OutputStream.Close();
-
                 }
                 httpListener.Stop();
             }
