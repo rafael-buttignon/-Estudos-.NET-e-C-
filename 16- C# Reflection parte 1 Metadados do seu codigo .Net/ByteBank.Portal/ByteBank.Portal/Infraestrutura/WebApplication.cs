@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using ByteBank.Portal.Controller;
+using System;
 using System.Net;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ByteBank.Portal.Infraestrutura
 {
@@ -28,7 +26,6 @@ namespace ByteBank.Portal.Infraestrutura
             {
                 ManipularRequisicao();
             }
-
         }
 
         private void ManipularRequisicao()
@@ -46,39 +43,45 @@ namespace ByteBank.Portal.Infraestrutura
 
                 var path = requisicao.Url.AbsolutePath;
 
-                if (path == "/Assets/css/style.css")
+
+                if (Utilidades.EhArquivo(path))
                 {
-                    //Retornar o nosso documento styles.css
+
                     var assembly = Assembly.GetExecutingAssembly();
-                    var nomeResorce = "ByteBank.Portal.Assets.css.styles.css";
-                    var resorceStream = assembly.GetManifestResourceStream(nomeResorce);
-                    var bytesResource = new byte[resorceStream.Length];
+                    var nomeResource = Utilidades.ConverterPathParaNomeAssembly(path);
 
-                    resorceStream.Read(bytesResource, 0, (int)resorceStream.Length);
-
-                    resposta.ContentType = "text/css; charset=utf-8";
-                    resposta.StatusCode = 200;
-                    resposta.ContentLength64 = resorceStream.Length;
-
-                    resposta.OutputStream.Write(bytesResource, 0, bytesResource.Length);
-                    resposta.OutputStream.Close();
-
-                }
-                else if (path == "/Assets/js/main.js")
-                {
-                    var assembly = Assembly.GetExecutingAssembly();
                     var nomeResorce = "Bytebank.Portal.Assets.js.main.js";
                     var resorceStream = assembly.GetManifestResourceStream(nomeResorce);
-                    var bytesResource = new byte[resorceStream.Length];
 
-                    resorceStream.Read(bytesResource, 0, (int)resorceStream.Length);
+                    if (resorceStream == null)
+                    {
+                        resposta.StatusCode = 404;
+                        resposta.OutputStream.Close();
+                    }
+                    else
+                    {
+                        var bytesResource = new byte[resorceStream.Length];
+                        resorceStream.Read(bytesResource, 0, (int)resorceStream.Length);
+                        resposta.ContentType = Utilidades.ObterTipoDeConteudo(path);
+                        resposta.StatusCode = 200;
+                        resposta.ContentLength64 = resorceStream.Length;
+                        resposta.OutputStream.Write(bytesResource, 0, bytesResource.Length);
+                        resposta.OutputStream.Close();
+                    }
+                }
+                else if(path == "/Cambio/MXN")
+                {
+                    //var controller = new CambioController();
+                    //var paginaConteudo = controller.MXN();
 
-                    resposta.ContentType = "application/js; charset=utf-8";
-                    resposta.StatusCode = 200;
-                    resposta.ContentLength64 = resorceStream.Length;
+                    //var bufferArquivo = Encoding.UTF8.GetBytes(paginaConteudo);
 
-                    resposta.OutputStream.Write(bytesResource, 0, bytesResource.Length);
-                    resposta.OutputStream.Close();
+                    //resposta.StatusCode = 200;
+                    //resposta.ContentType = Utilidades.ObterTipoDeConteudo(path);
+                    //resposta.ContentType = "text/html; charset=utf-8";
+                    //resposta.OutputStream.Write(bufferArquivo, 0, bufferArquivo.Length);
+                    //resposta.OutputStream.Close();
+
                 }
                 httpListener.Stop();
             }
