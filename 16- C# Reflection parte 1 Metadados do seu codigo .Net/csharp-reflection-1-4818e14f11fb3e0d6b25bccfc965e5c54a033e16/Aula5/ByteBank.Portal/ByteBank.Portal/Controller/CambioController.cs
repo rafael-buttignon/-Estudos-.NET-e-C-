@@ -1,13 +1,7 @@
-﻿using ByteBank.Portal.Infraestrutura;
+﻿using ByteBank.Portal.Filtros;
+using ByteBank.Portal.Infraestrutura;
 using ByteBank.Service;
 using ByteBank.Service.Cambio;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ByteBank.Portal.Controller
 {
@@ -20,6 +14,7 @@ namespace ByteBank.Portal.Controller
             _cambioService = new CambioTesteService();
         }
 
+        [ApenasHorarioComercialFiltroAttribute]
         public string MXN()
         {
             var valorFinal = _cambioService.Calcular("MXN", "BRL", 1);
@@ -30,6 +25,7 @@ namespace ByteBank.Portal.Controller
             return textoResultado;
         }
 
+        [ApenasHorarioComercialFiltroAttribute]
         public string USD()
         {
             var valorFinal = _cambioService.Calcular("USD", "BRL", 1);
@@ -40,24 +36,27 @@ namespace ByteBank.Portal.Controller
             return textoResultado;
         }
 
+        [ApenasHorarioComercialFiltroAttribute]
         public string Calculo(string moedaOrigem, string moedaDestino, decimal valor)
         {
             var valorFinal = _cambioService.Calcular(moedaOrigem, moedaDestino, valor);
-            var textoPagina = View();
 
-            var textoResultado = 
-                textoPagina
-                    .Replace("VALOR_MOEDA_ORIGEM", valor.ToString())
-                    .Replace("VALOR_MOEDA_DESTINO", valorFinal.ToString())
-                    .Replace("MOEDA_ORIGEM", moedaOrigem)
-                    .Replace("MOEDA_DESTINO", moedaDestino);
+            var modelo = new
+            {
+                MoedaDestino = moedaDestino,
+                ValorDestino = valorFinal,
+                MoedaOrigem = moedaOrigem,
+                ValorOrigem = valor
+            };
 
-            return textoResultado;
+            return View(modelo);
         }
 
+        [ApenasHorarioComercialFiltroAttribute]
         public string Calculo(string moedaDestino, decimal valor) =>
             Calculo("BRL", moedaDestino, valor);
 
+        [ApenasHorarioComercialFiltroAttribute]
         public string Calculo(string moedaDestino) =>
             Calculo("BRL", moedaDestino, 1);
     }
