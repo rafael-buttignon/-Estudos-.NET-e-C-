@@ -41,7 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cambio\CambioTesteService.cs" />
+    <Compile Include="Cartao\CartaoService.cs" />
     <Compile Include="ICambioService.cs" />
+    <Compile Include="ICartaoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

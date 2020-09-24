@@ -45,12 +45,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\CambioController.cs" />
+    <Compile Include="Controller\ErroController.cs" />
     <Compile Include="Filtros\ApenasHorarioComercialAttribute.cs" />
     <Compile Include="Infraestrutura\Binding\ActionBinder.cs" />
     <Compile Include="Infraestrutura\Binding\ActionBindInfo.cs" />
     <Compile Include="Infraestrutura\Binding\ArgumentoNomeValor.cs" />
     <Compile Include="Infraestrutura\ControllerBase.cs" />
     <Compile Include="Infraestrutura\Filtros\FilterResolver.cs" />
+    <Compile Include="Infraestrutura\Filtros\FilterResult.cs" />
     <Compile Include="Infraestrutura\Filtros\FiltroAttribute.cs" />
     <Compile Include="Infraestrutura\ManipuladorRequisicaoArquivo.cs" />
     <Compile Include="Infraestrutura\ManipuladorRequisicaoController.cs" />
@@ -82,6 +84,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="View\Erro\Inesperado.html" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

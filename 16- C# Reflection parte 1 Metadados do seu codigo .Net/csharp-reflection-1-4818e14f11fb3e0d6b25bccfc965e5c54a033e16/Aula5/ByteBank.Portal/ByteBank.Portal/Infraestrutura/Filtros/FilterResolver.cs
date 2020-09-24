@@ -1,11 +1,12 @@
 ﻿using ByteBank.Portal.Filtros;
 using ByteBank.Portal.Infraestrutura.Binding;
+using System;
 
 namespace ByteBank.Portal.Infraestrutura.Filtros
 {
     public class FilterResolver
     {
-        public object VerficarFiltros(ActionBindInfo actionBindInfo)
+        public FilterResult VerficarFiltros(ActionBindInfo actionBindInfo)
         {
             var methodInfo = actionBindInfo.MethodInfo;
 
@@ -13,11 +14,12 @@ namespace ByteBank.Portal.Infraestrutura.Filtros
             var atributos = methodInfo.GetCustomAttributes(typeof(FiltroAttribute), false);
 
             foreach (FiltroAttribute filtro in atributos)
-            {
-                filtro.PodeContinuar();
-            }
+                if (!filtro.PodeContinuar())
+                    return new FilterResult(false);
 
-            //methodInfo.GetCustomAttributes;
+            return new FilterResult(true);
+
+
         }
     }
 }
