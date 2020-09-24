@@ -46,6 +46,39 @@ namespace ByteBank.Portal.Infraestrutura.IoC
 
         public object Recuperar(Type tipoOrigem)
         {
+            var tipoOrigemFoiMapeado = _mapaDeTipos.ContainsKey(tipoOrigem);
+            
+            if (tipoOrigemFoiMapeado)
+            {
+                var tipoDestino = _mapaDeTipos[tipoOrigem];
+                return Recuperar(tipoDestino);
+            }
+
+            var construtores = tipoOrigem.GetConstructors();
+
+            var construtoSemParametros = construtores
+                .FirstOrDefault(construtor => construtor.GetParameters().Any() == false);
+
+            if(construtoSemParametros != null)
+            {
+                var instanciaDeConstrutorSemParametro = construtoSemParametros.Invoke(new object[0]);
+                return instanciaDeConstrutorSemParametro;
+            }
+
+            var construtorQueVamosUsar = construtores[0];
+            var parametrosDoConstrutor = construtorQueVamosUsar.GetParameters();
+            var valoresDeParametros = new object[parametrosDoConstrutor.Count()];
+
+            for (int i = 0; i < parametrosDoConstrutor.Count(); i++)
+            {
+                var parametro = parametrosDoConstrutor[i];
+                var tipoParametro = parametro.ParameterType;
+
+                valoresDeParametros[i] = Recuperar(tipoParametro);
+            }
+
+            var instancia = construtorQueVamosUsar.Invoke(valoresDeParametros);
+            return instancia;
         }
     }
 }
