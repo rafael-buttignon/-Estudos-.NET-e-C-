@@ -1,17 +1,8 @@
 ﻿using ByteBank.Agencias.DAL;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace ByteBank.Agencias
 {
@@ -42,20 +33,49 @@ namespace ByteBank.Agencias
 
         private void AtualizarControles()
         {
-            var okEventHandler = (RoutedEventHandler)btnOk_Click + Fechar;
-            var cancelarEventHandler = (RoutedEventHandler)btnCancelar_Click + Fechar;
+            RoutedEventHandler dialogResultTrue = (o, e) => DialogResult = true;
+            RoutedEventHandler dialogResultFalse = (o, e) => DialogResult = false;
+
+            var okEventHandler = dialogResultTrue + Fechar;
+            var cancelarEventHandler = dialogResultFalse + Fechar;
 
             btnOk.Click += okEventHandler;
             btnCancelar.Click += cancelarEventHandler;
+
+            txtNome.TextChanged += ValidarCampoNulo;
+            txtNome.TextChanged += ValidarCampoNulo;
+            txtNome.TextChanged += ValidarCampoNulo;
+            txtNome.TextChanged += ValidarCampoNulo;
+            txtNome.TextChanged += ValidarCampoNulo;
         }
 
-        private void btnOk_Click(object sender, EventArgs e) =>
-            DialogResult = true;
-
-        private void btnCancelar_Click(object sender, EventArgs e) =>
-            DialogResult = false;
+        private void ValidarCampoNulo(object sender, EventArgs e)
+        {
+            var txt = sender as TextBox;
+                var textoEstaVazio = String.IsNullOrEmpty(txt.Text);
+                txt.Background = textoEstaVazio ?
+                new SolidColorBrush(Colors.OrangeRed) :
+                new SolidColorBrush(Colors.White);
+        }
 
         private void Fechar(object sender, EventArgs e) =>
             Close();
+    }
+
+    public class AgenciaPessoaFisica : Agencia
+    {
+    }
+
+    public class AgenciaPessoaJuridica : Agencia
+    {
+    }
+
+    public class ExtensoesAgencia
+    {
+        public void InaugurarAgencia(Agencia a)
+        {
+            InaugurarAgencia(new AgenciaPessoaFisica());
+            InaugurarAgencia(new AgenciaPessoaJuridica());
+        }
     }
 }
