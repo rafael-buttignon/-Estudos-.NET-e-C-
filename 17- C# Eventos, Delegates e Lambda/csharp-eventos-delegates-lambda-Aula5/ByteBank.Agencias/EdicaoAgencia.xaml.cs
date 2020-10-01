@@ -1,8 +1,17 @@
 ﻿using ByteBank.Agencias.DAL;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 
 namespace ByteBank.Agencias
 {
@@ -42,40 +51,28 @@ namespace ByteBank.Agencias
             btnOk.Click += okEventHandler;
             btnCancelar.Click += cancelarEventHandler;
 
-            txtNome.TextChanged += ValidarCampoNulo;
-            txtNome.TextChanged += ValidarCampoNulo;
-            txtNome.TextChanged += ValidarCampoNulo;
-            txtNome.TextChanged += ValidarCampoNulo;
-            txtNome.TextChanged += ValidarCampoNulo;
+            txtNumero.Validacao += ValidarCampoNulo;
+            txtNumero.Validacao += ValidarSomenteDigito;
+
+            txtNome.Validacao += ValidarCampoNulo;
+            txtDescricao.Validacao += ValidarCampoNulo;
+            txtEndereco.Validacao += ValidarCampoNulo;
+            txtTelefone.Validacao += ValidarCampoNulo;
+        }
+        
+        private void ValidarSomenteDigito(object sender, ValidacaoEventArgs e)
+        {
+            var ehValido = e.Texto.All(Char.IsDigit);
+            e.EhValido = ehValido;
         }
 
-        private void ValidarCampoNulo(object sender, EventArgs e)
+        private void ValidarCampoNulo(object sender, ValidacaoEventArgs e)
         {
-            var txt = sender as TextBox;
-                var textoEstaVazio = String.IsNullOrEmpty(txt.Text);
-                txt.Background = textoEstaVazio ?
-                new SolidColorBrush(Colors.OrangeRed) :
-                new SolidColorBrush(Colors.White);
+            var ehValido = !String.IsNullOrEmpty(e.Texto);
+            e.EhValido = ehValido;
         }
 
         private void Fechar(object sender, EventArgs e) =>
             Close();
-    }
-
-    public class AgenciaPessoaFisica : Agencia
-    {
-    }
-
-    public class AgenciaPessoaJuridica : Agencia
-    {
-    }
-
-    public class ExtensoesAgencia
-    {
-        public void InaugurarAgencia(Agencia a)
-        {
-            InaugurarAgencia(new AgenciaPessoaFisica());
-            InaugurarAgencia(new AgenciaPessoaJuridica());
-        }
     }
 }
