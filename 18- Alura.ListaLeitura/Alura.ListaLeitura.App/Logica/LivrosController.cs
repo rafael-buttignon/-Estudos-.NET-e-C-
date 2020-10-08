@@ -1,13 +1,17 @@
 ﻿using Alura.ListaLeitura.App.HTML;
+using Alura.ListaLeitura.App.Negocio;
 using Alura.ListaLeitura.App.Repositorio;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Alura.ListaLeitura.App.Logica
 {
-    public class LivrosController
+    public class LivrosController : Controller
     {
+        public IEnumerable<Livro> Livros { get; set; }
         public string Detalhes(int id)
         {
             var repo = new LivroRepositorioCSV();
@@ -15,31 +19,26 @@ namespace Alura.ListaLeitura.App.Logica
             return livro.Detalhes();
         }
 
-        public static Task ParaLer(HttpContext context)
+        public IActionResult ParaLer()
         {
             var _repo = new LivroRepositorioCSV();
-            var conteudoArquivo = HtmlUtils.CarregaArquivoHTML("para-ler");
-
-            foreach (var livro in _repo.ParaLer.Livros)
-            {
-                conteudoArquivo = conteudoArquivo
-                    .Replace("#NOVO-ITEM#", $"<li> { livro.Titulo } - { livro.Autor }<li>#NOVO-ITEM#");
-            }
-            conteudoArquivo = conteudoArquivo.Replace("#NOVO-ITEM#", "");
-
-            return context.Response.WriteAsync(conteudoArquivo);
+            ViewBag.Livros = _repo.ParaLer.Livros;
+            return View("lista");
         }
 
-        public static Task Lendo(HttpContext context)
+        public IActionResult Lendo()
         {
             var _repo = new LivroRepositorioCSV();
-            return context.Response.WriteAsync(_repo.Lendo.ToString());
+            ViewBag.Livros = _repo.Lendo.Livros;
+            return View("lista");
         }
 
-        public static Task Lidos(HttpContext context)
+        public IActionResult Lidos()
         {
             var _repo = new LivroRepositorioCSV();
-            return context.Response.WriteAsync(_repo.Lidos.ToString());
+            ViewBag.Livros = _repo.Lendo.Livros;
+            return View("lista");
+
         }
 
         public string Teste()
