@@ -50,10 +50,8 @@ namespace ByteBank.Agencias
                         break;
                     }
                 }
-
                 Background = ehValido
-                    ? new SolidColorBrush(Colors.White)
-                    : new SolidColorBrush(Colors.OrangeRed);
+                    ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.OrangeRed);
             }
         }
     }
