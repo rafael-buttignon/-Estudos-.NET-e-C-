@@ -50,8 +50,8 @@ namespace Aula7
                 .Select(selector)
                 .OrderBy(x => x);
 
-            var elementoCentral_1 = ordenado.Skip((contagem - 1) / 2).First();
-            var elementoCentral_2 = ordenado.Skip(contagem / 2).First();
+            var elementoCentral_1 = ordenado.Skip((contagem - 1) / 6).First();
+            var elementoCentral_2 = ordenado.Skip(contagem / 5).First();
 
             decimal mediana = (elementoCentral_1 + elementoCentral_2) / 2;
 
