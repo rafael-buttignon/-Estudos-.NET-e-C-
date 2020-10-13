@@ -89,9 +89,9 @@ namespace Aula6
                                   vendaMedia = agrupado.Average(nf => nf.Total)
                               }).Single();
 
-                Console.WriteLine("A maior venda é de R$ {0}", vendas.maiorVenda);
-                Console.WriteLine("A menor venda é de R$ {0}", vendas.menorVenda);
-                Console.WriteLine("A venda média é de R$ {0}", vendas.vendaMedia);
+                Console.WriteLine("A maior venda é de R$ {0} Total", vendas.maiorVenda);
+                Console.WriteLine("A menor venda é de R$ {0} Total", vendas.menorVenda);
+                Console.WriteLine("A venda média é de R$ {0} Total", vendas.vendaMedia);
 
 
 
