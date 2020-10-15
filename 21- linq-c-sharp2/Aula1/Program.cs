@@ -49,9 +49,13 @@ namespace Aula1
             Console.WriteLine("Página: {0}", pagina);
             Console.WriteLine();
 
-            foreach (var nf in query)
+            foreach (var notaFiscal in query)
             {
-                Console.WriteLine("{0}\t{1}\t{2}\t{3}", nf.Numero, nf.Data, nf.Cliente, nf.Total);
+                Console.WriteLine("{0}\t{1}\t{2}\t{3}", 
+                    notaFiscal.Numero, 
+                    notaFiscal.Data, 
+                    notaFiscal.Cliente, 
+                    notaFiscal.Total);
             }
         }
     }
