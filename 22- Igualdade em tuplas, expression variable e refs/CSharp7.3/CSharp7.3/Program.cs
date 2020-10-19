@@ -6,7 +6,7 @@ namespace CSharp7._3
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            TesteTuples.TestaTuple();
         }
     }
 }
