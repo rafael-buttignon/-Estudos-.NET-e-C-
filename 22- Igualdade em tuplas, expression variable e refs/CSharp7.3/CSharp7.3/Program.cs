@@ -6,7 +6,7 @@ namespace CSharp7._3
     {
         static void Main(string[] args)
         {
-            TesteTuples.TestaTuple();
+            TesteTuples.TestaIgualdade2();
         }
     }
 }
