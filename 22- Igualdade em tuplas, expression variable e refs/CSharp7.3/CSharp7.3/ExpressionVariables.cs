@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace CSharp7._3
 {
@@ -28,6 +29,20 @@ namespace CSharp7._3
                 Console.WriteLine("Você pode entrar");
             }
 
+        }
+
+        public static void RegistroDeAlunos()
+        {
+            var registroAlunos = new string[]
+            {
+                "1110651", "1020651", "1110600",
+                "1310800", "211060T", "011060W"
+            };
+
+            var alunosValidos =
+                from ra in registroAlunos
+                where int.TryParse(ra, out int raComoInt) && raComoInt > 1000
+                select ra + " é válido";
         }
     }
 }
