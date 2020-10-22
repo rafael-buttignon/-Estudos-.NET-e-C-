@@ -24,19 +24,46 @@ namespace CSharp7._3
 
         private static ref int ObterMaiorValor(int[] numeros)
         {
+            Span<int> numerosSpan = new Span<int>(numeros);
+
             ref var maior = ref numeros[0];
-            for(int i = 1; i<numeros.Length; i++)
+
+            foreach (ref var item in numerosSpan.Slice(0))
             {
-                if(numeros[i] > maior)
+                if (item > maior)
                 {
-                    maior = ref numeros[i];
+                    maior = ref item;
                 }
             }
+
             return ref maior;
         }
-        private static void EscreverNumeros(int[] numeros)
+        private static void EscreverNumeros(int[] numeros) =>
+            Console.WriteLine(string.Join(", ", numeros));
+
+        class MeuIteravel
         {
-            throw new NotImplementedException();
+            public MeuEnumerator GetEnumerador()
+            {
+                return new MeuEnumerator();
+            }
+        }
+
+        class MeuEnumerator
+        {
+            private int[] numeros = { 1, 2, 3 };
+            public ref int Current
+            {
+                get
+                {
+                    return ref numeros[0];
+                }
+            }
+        }
+
+        public bool MoveNext()
+        {
+            return false;
         }
     }
 }
